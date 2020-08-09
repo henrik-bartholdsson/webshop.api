@@ -8,5 +8,6 @@ namespace WebShop.API.Models
         public int Id { get; set; }
         public string Address { get; set; }
         public bool Enabled { get; set; }
+        public string Comment { get; set; }
     }
 }
