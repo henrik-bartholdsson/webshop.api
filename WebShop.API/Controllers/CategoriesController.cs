@@ -9,10 +9,10 @@ namespace WebShop.API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
-        public CategoriesController(ICategoryService categoryService)
+        private readonly IWebShopService _categoryService;
+        public CategoriesController()
         {
-            _categoryService = categoryService;
+            _categoryService = new WebShopService();
         }
 
         public IEnumerable<CategoryDto> Get()

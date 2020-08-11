@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebShop.API.Models;
 using WebShop.API.Repository;
@@ -6,15 +7,15 @@ using WebShop.Data.Models.Dto;
 
 namespace WebShop.API.Services
 {
-    public interface ICategoryService
+    public interface IWebShopService
     {
         List<CategoryDto> GetAllActiveCategories();
         List<ItemDto> GetAllItems();
     }
-    public class CategoryService : ICategoryService
+    public class WebShopService : IWebShopService
     {
         private readonly ICategoryRepo _categoryRepo;
-        public CategoryService()
+        public WebShopService()
         {
             _categoryRepo = new CategoryRepo();
         }
@@ -42,7 +43,16 @@ namespace WebShop.API.Services
             return _categoryRepo.GetAllItems();
         }
 
+        public string[] GetListOfAllActiveCors()
+        {
+            using (var context = new WebShopContext())
+            {
+                var allActiveCors = context.CORS.Where(cors => cors.ACTIVE == true && !String.IsNullOrEmpty(cors.ADDRESS) && !cors.ADDRESS.Contains("*")).ToList();
+                var allActiveCorsAsList = allActiveCors.Select(c => c.ADDRESS).ToArray();
 
+                return allActiveCorsAsList;
+            }
+        }
 
 
         #region Private methods

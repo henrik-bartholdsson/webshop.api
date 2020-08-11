@@ -11,7 +11,7 @@ namespace WebShop.API.Controllers
     {
         public IEnumerable<ItemDto> Get()
         {
-            var cat = new CategoryService();
+            var cat = new WebShopService();
 
             var allItems = cat.GetAllItems();
 

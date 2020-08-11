@@ -32,11 +32,9 @@ namespace WebShop.API.Repository
                     Description = categorie.DESCRIPTION,
                     ParentId = categorie.PARENT_ID,
                     ProductId = categorie.PRODUCT_ID,
-                    ProjectId = categorie.PROJECT_ID,
                     RedirectToId = categorie.REDIRECT_TO_ID,
                     SortOrder = categorie.SORT_ORDER,
                     Title = categorie.TITLE,
-                    TypId = categorie.TYPE_ID
                 });
             }
 
