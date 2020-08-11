@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebShop.API.App_Start;
-using WebShop.Core.Services;
+using WebShop.API.Services;
 
 namespace WebShop.API
 {
@@ -37,7 +37,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var corsSerice = new CorsServiceA(); // TODO inject service to constructor
+            var corsSerice = new WebShopService(); // TODO inject service to constructor
             var cors = corsSerice.GetListOfAllActiveCors();
 
             app.UseCors(options => options.WithOrigins(cors));
