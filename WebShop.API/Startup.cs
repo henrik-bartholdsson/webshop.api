@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using WebShop.API.App_Start;
-using WebShop.API.Models;
-using WebShop.API.Repository;
-using WebShop.API.Services;
 using WebShop.Core.Services;
 
 namespace WebShop.API
@@ -22,7 +16,6 @@ namespace WebShop.API
         }
 
         public IConfiguration Configuration { get; }
-        // private WebShopContext _context;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -44,7 +37,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var corsSerice = new CorsServiceA();
+            var corsSerice = new CorsServiceA(); // TODO inject service to constructor
             var cors = corsSerice.GetListOfAllActiveCors();
 
             app.UseCors(options => options.WithOrigins(cors));
