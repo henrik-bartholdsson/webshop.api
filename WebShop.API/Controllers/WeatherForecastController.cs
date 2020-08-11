@@ -12,7 +12,6 @@ namespace WebShop.API.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly WebShopContext _context;
 
         private static readonly string[] Summaries = new[]
         {
@@ -21,10 +20,9 @@ namespace WebShop.API.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, WebShopContext context)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
         [HttpGet]

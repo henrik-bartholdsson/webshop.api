@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using WebShop.API.Models;
+using WebShop.API.Services;
+using WebShop.Data.Models.Dto;
 
 namespace WebShop.API.Controllers
 {
@@ -9,14 +9,11 @@ namespace WebShop.API.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly WebShopContext _context;
-        public ItemsController(WebShopContext context)
+        public IEnumerable<ItemDto> Get()
         {
-            _context = context;
-        }
-        public IEnumerable<Item> Get()
-        {
-            var allItems = _context.Items;
+            var cat = new CategoryService();
+
+            var allItems = cat.GetAllItems();
 
 
 

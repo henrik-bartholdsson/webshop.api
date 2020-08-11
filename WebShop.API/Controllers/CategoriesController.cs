@@ -17,7 +17,7 @@ namespace WebShop.API.Controllers
 
         public IEnumerable<CategoryDto> Get()
         {
-            var categories = _categoryService.GetActiveCategories();
+            var categories = _categoryService.GetAllActiveCategories();
 
             return categories;
         }

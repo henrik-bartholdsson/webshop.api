@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using WebShop.API.Models;
 using WebShop.API.Repository;
+using WebShop.Data.Models.Dto;
 
 namespace WebShop.API.Services
 {
     public interface ICategoryService
     {
-        List<CategoryDto> GetActiveCategories();
+        List<CategoryDto> GetAllActiveCategories();
+        List<ItemDto> GetAllItems();
     }
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepo _categoryRepo;
-        public CategoryService(ICategoryRepo categoryRepo)
+        public CategoryService()
         {
-            _categoryRepo = categoryRepo;
+            _categoryRepo = new CategoryRepo();
         }
 
 
-        public List<CategoryDto> GetActiveCategories()
+        public List<CategoryDto> GetAllActiveCategories()
         {
             var returnCategories = new List<CategoryDto>();
             var allCategories = _categoryRepo.GetAllCategories();
@@ -35,6 +36,16 @@ namespace WebShop.API.Services
             return MergeCategories(returnCategories);
         }
 
+        public List<ItemDto> GetAllItems()
+        {
+            var _categoryRepo = new CategoryRepo();
+            return _categoryRepo.GetAllItems();
+        }
+
+
+
+
+        #region Private methods
         private static List<CategoryDto> MergeCategories(List<CategoryDto> categories)
         {
             var categoryList = new List<CategoryDto>();
@@ -48,5 +59,7 @@ namespace WebShop.API.Services
 
             return categoryList;
         }
+
+        #endregion
     }
 }

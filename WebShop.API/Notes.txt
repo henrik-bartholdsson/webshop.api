@@ -1,4 +1,0 @@
-﻿API for react app Webshop
-Cors added
-
-Create local db for store CORS addresses & items

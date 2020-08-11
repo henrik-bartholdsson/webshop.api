@@ -2,12 +2,12 @@
 
 namespace WebShop.API.Models
 {
-    public class Cors
+    public class CORS
     {
         [Key]
-        public int Id { get; set; }
-        public string Address { get; set; }
-        public bool Enabled { get; set; }
-        public string Comment { get; set; }
+        public int ID { get; set; }
+        public string ADDRESS { get; set; }
+        public bool ACTIVE { get; set; }
+        public string COMMENT { get; set; }
     }
 }

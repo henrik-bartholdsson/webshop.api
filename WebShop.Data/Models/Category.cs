@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebShop.API.Models
 {
-    public class Category
+    public class CATEGORY
     {
         [Key]
         public int PRODUCT_ID { get; set; }

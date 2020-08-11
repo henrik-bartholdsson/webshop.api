@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace WebShop.API.Models
+namespace WebShop.Data.Models.Dto
 {
-    public class Item
+    public class ItemDto
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
