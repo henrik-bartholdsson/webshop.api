@@ -6,7 +6,7 @@ VALUES
 	(3,'First Level B', 'Some description', 1, null, null, 1),
 	(4,'Second Level B', 'Some description', 1, 3, null, 1),
 	(5,'Second Level B', 'Some description', 1, 3, null, 1),
-	(6,'Second Level B', 'Some description', 1, 3, null, 1),
+	(6,'Third Level B', 'Some description', 1, 5, null, 1),
 	(7,'Second Level A', 'Some description', 1, 1, null, 1)
 
 
