@@ -15,8 +15,8 @@ namespace WebShop.API.Services
     }
     public class WebShopService : IWebShopService
     {
-        private readonly ICategoryRepo _categoryRepo;
-        public WebShopService(ICategoryRepo categoryRepo)
+        private readonly IWebShopRepo _categoryRepo;
+        public WebShopService(IWebShopRepo categoryRepo)
         {
             _categoryRepo = categoryRepo;
         }

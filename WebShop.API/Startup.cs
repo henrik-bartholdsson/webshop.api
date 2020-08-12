@@ -26,7 +26,7 @@ namespace WebShop.API
         {
             var connectionstring = Configuration.GetConnectionString("WebShopDev");
             services.AddMvc();
-            services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<IWebShopRepo, WebShopRepo>();
             services.AddScoped<IWebShopService, WebShopService>();
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
             DbUpConfig.InitDatabse(connectionstring);

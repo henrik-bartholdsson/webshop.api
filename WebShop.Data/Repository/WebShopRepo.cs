@@ -6,16 +6,16 @@ using WebShop.Data.Models.Dto;
 
 namespace WebShop.API.Repository
 {
-    public interface ICategoryRepo
+    public interface IWebShopRepo
     {
         List<CategoryDto> GetAllCategories();
         List<ItemDto> GetAllItems();
         List<CORS> GetAllCors();
     }
-    public class CategoryRepo : ICategoryRepo
+    public class WebShopRepo : IWebShopRepo
     {
         private readonly WebShopContext _context;
-        public CategoryRepo(DbContextOptions options)
+        public WebShopRepo(DbContextOptions options)
         {
             _context = new WebShopContext(options);
         }
