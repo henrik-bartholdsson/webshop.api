@@ -7,15 +7,8 @@ namespace WebShop.API.App_Start
 {
     public class DbUpConfig
     {
-        public static void InitDatabse()
+        public static void InitDatabse(string connectionString)
         {
-            using (var context = new WebShopContext())
-            {
-
-
-                var dBconnection = context.Database.GetDbConnection();
-                var connectionString = dBconnection.ConnectionString;
-
                 EnsureDatabase.For.SqlDatabase(connectionString);
 
                 var upgrader =
@@ -31,7 +24,6 @@ namespace WebShop.API.App_Start
 
                 var a = upgrader.GetScriptsToExecute();
                 upgrader.PerformUpgrade();
-            }
         }
 
         private static void WaitForDatabase(DbUp.Engine.UpgradeEngine upgrader)

@@ -5,17 +5,18 @@ using WebShop.Data.Models.Dto;
 
 namespace WebShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ItemsController : ControllerBase
     {
+        private readonly IWebShopService _categoryService;
+        public ItemsController(IWebShopService categoryService)
+        {
+            _categoryService = categoryService;
+        }
         public IEnumerable<ItemDto> Get()
         {
-            var cat = new WebShopService();
-
-            var allItems = cat.GetAllItems();
-
-
+            var allItems = _categoryService.GetAllItems();
 
             return allItems;
         }

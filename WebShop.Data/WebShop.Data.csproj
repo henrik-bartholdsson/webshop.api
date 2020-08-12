@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\ijdoaysm.bn4~" />
     <None Remove="Scripts\Structure\0001 Create Tables.sql" />
   </ItemGroup>
 

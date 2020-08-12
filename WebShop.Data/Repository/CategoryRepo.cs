@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using WebShop.API.Models;
 using WebShop.Data.Models.Dto;
@@ -9,13 +10,14 @@ namespace WebShop.API.Repository
     {
         List<CategoryDto> GetAllCategories();
         List<ItemDto> GetAllItems();
+        List<CORS> GetAllCors();
     }
     public class CategoryRepo : ICategoryRepo
     {
         private readonly WebShopContext _context;
-        public CategoryRepo()
+        public CategoryRepo(DbContextOptions options)
         {
-            _context = new WebShopContext(); // Använd using istället
+            _context = new WebShopContext(options);
         }
 
         public List<CategoryDto> GetAllCategories()
@@ -43,26 +45,29 @@ namespace WebShop.API.Repository
 
         public List<ItemDto> GetAllItems()
         {
-            using (var context = new WebShopContext())
+            var allItems = _context.PRODUCT.ToList();
+            var itemDto = new List<ItemDto>();
+
+            foreach (var item in allItems)
             {
-                var allItems = context.PRODUCT.ToList();
-                var itemDto = new List<ItemDto>();
-
-                foreach (var item in allItems)
+                itemDto.Add(new ItemDto
                 {
-                    itemDto.Add(new ItemDto
-                    {
-                        Description = item.DESCRIPTION,
-                        ExtraPrice = item.EXTRA_PRICE,
-                        ExtraPriceActive = item.EXTRA_PRICE_ACTIVE,
-                        Id = item.PRODUCT_ID,
-                        Name = item.NAME,
-                        Price = item.PRICE
-                    });
-                }
-
-                return itemDto;
+                    Description = item.DESCRIPTION,
+                    ExtraPrice = item.EXTRA_PRICE,
+                    ExtraPriceActive = item.EXTRA_PRICE_ACTIVE,
+                    Id = item.PRODUCT_ID,
+                    Name = item.NAME,
+                    Price = item.PRICE
+                });
             }
+
+            return itemDto;
         }
+
+        public List<CORS> GetAllCors()
+        {
+            return _context.CORS.ToList();
+        }
+
     }
 }

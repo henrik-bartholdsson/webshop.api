@@ -11,13 +11,14 @@ namespace WebShop.API.Services
     {
         List<CategoryDto> GetAllActiveCategories();
         List<ItemDto> GetAllItems();
+        string[] GetListOfAllActiveCors();
     }
     public class WebShopService : IWebShopService
     {
         private readonly ICategoryRepo _categoryRepo;
-        public WebShopService()
+        public WebShopService(ICategoryRepo categoryRepo)
         {
-            _categoryRepo = new CategoryRepo();
+            _categoryRepo = categoryRepo;
         }
 
 
@@ -39,19 +40,17 @@ namespace WebShop.API.Services
 
         public List<ItemDto> GetAllItems()
         {
-            var _categoryRepo = new CategoryRepo();
             return _categoryRepo.GetAllItems();
         }
 
         public string[] GetListOfAllActiveCors()
         {
-            using (var context = new WebShopContext())
-            {
-                var allActiveCors = context.CORS.Where(cors => cors.ACTIVE == true && !String.IsNullOrEmpty(cors.ADDRESS) && !cors.ADDRESS.Contains("*")).ToList();
+            var allcors = _categoryRepo.GetAllCors();
+
+                var allActiveCors = allcors.Where(cors => cors.ACTIVE == true && !String.IsNullOrEmpty(cors.ADDRESS) && !cors.ADDRESS.Contains("*")).ToList();
                 var allActiveCorsAsList = allActiveCors.Select(c => c.ADDRESS).ToArray();
 
                 return allActiveCorsAsList;
-            }
         }
 
 

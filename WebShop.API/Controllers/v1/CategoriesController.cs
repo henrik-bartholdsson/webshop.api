@@ -5,14 +5,14 @@ using WebShop.API.Services;
 
 namespace WebShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
         private readonly IWebShopService _categoryService;
-        public CategoriesController()
+        public CategoriesController(IWebShopService categoryService)
         {
-            _categoryService = new WebShopService();
+            _categoryService = categoryService;
         }
 
         public IEnumerable<CategoryDto> Get()
