@@ -11,6 +11,7 @@ namespace WebShop.API.Repository
         List<CategoryDto> GetAllCategories();
         List<ItemDto> GetAllItems();
         List<CORS> GetAllCors();
+        List<PRODUCT> GetItemsByCategoryId(int catId);
     }
     public class WebShopRepo : IWebShopRepo
     {
@@ -64,10 +65,17 @@ namespace WebShop.API.Repository
             return itemDto;
         }
 
+        public List<PRODUCT> GetItemsByCategoryId(int catId)
+        {
+            return _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == catId).ToList();
+        }
+
         public List<CORS> GetAllCors()
         {
             return _context.CORS.ToList();
         }
+
+
 
     }
 }

@@ -14,11 +14,23 @@ namespace WebShop.API.Controllers
         {
             _categoryService = categoryService;
         }
+
+
+        [HttpGet]
         public IEnumerable<ItemDto> Get()
         {
             var allItems = _categoryService.GetAllItems();
 
             return allItems;
         }
+
+        [HttpGet]
+        public IEnumerable<ItemDto> Get(int category)
+        {
+            var allItems = _categoryService.GetProductsByCategoryId(category);
+
+            return allItems;
+        }
+
     }
 }

@@ -11,6 +11,7 @@ namespace WebShop.API.Services
     {
         List<CategoryDto> GetAllActiveCategories();
         List<ItemDto> GetAllItems();
+        List<ItemDto> GetProductsByCategoryId(int catId);
         string[] GetListOfAllActiveCors();
     }
     public class WebShopService : IWebShopService
@@ -43,6 +44,15 @@ namespace WebShop.API.Services
             return _categoryRepo.GetAllItems();
         }
 
+        public List<ItemDto> GetProductsByCategoryId(int catId)
+        {
+            var a = _categoryRepo.GetItemsByCategoryId(catId);
+
+            var b = ConvertProductToProductDto(a);
+
+            return b;
+        }
+
         public string[] GetListOfAllActiveCors()
         {
             var allcors = _categoryRepo.GetAllCors();
@@ -55,18 +65,36 @@ namespace WebShop.API.Services
 
 
         #region Private methods
-        private static List<CategoryDto> MergeCategories(List<CategoryDto> categories)
+
+        private static List<CategoryDto> MergeCategories(List<CategoryDto> categories, int? id = null)
         {
-            var categoryList = new List<CategoryDto>();
+            var result = categories.Where(c => c.ParentId == id).ToList();
 
-            categoryList = categories.Where(c => c.ParentId == 0 || c.ParentId == null).ToList();
-
-            foreach (var category in categoryList)
+            foreach (var category in result)
             {
-                category.SubCategories = categories.Where(c => c.ParentId == category.ProductId).ToList();
+                category.SubCategories = MergeCategories(categories, category.ProductId);
             }
 
-            return categoryList;
+            return result;
+        }
+
+        private static List<ItemDto> ConvertProductToProductDto(List<PRODUCT> products)
+        {
+            var _products = new List<ItemDto>();
+
+            foreach(var proddut in products)
+            {
+                _products.Add(new ItemDto() {
+                    Description = proddut.DESCRIPTION,
+                    ExtraPrice = proddut.EXTRA_PRICE,
+                    ExtraPriceActive = proddut.EXTRA_PRICE_ACTIVE,
+                    Id = proddut.PRODUCT_ID,
+                    Name = proddut.NAME,
+                    Price = proddut.PRICE,
+                });
+            }
+
+            return _products;
         }
 
         #endregion
