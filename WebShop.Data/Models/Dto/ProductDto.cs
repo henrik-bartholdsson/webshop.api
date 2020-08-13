@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebShop.Data.Models.Dto
 {
-    public class ItemDto
+    public class ProductDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,5 +12,6 @@ namespace WebShop.Data.Models.Dto
         public int Price { get; set; }
         public int ExtraPrice { get; set; }
         public bool ExtraPriceActive { get; set; }
+        public int Category_id { get; set; }
     }
 }

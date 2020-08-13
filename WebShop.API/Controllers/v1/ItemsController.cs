@@ -9,25 +9,25 @@ namespace WebShop.API.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly IWebShopService _categoryService;
+        private readonly IWebShopService _webShopService;
         public ItemsController(IWebShopService categoryService)
         {
-            _categoryService = categoryService;
+            _webShopService = categoryService;
         }
 
 
-        [HttpGet]
-        public IEnumerable<ItemDto> Get()
-        {
-            var allItems = _categoryService.GetAllItems();
+        //[HttpGet]
+        //public IEnumerable<ItemDto> Get()
+        //{
+        //    var allItems = _categoryService.GetAllItems();
 
-            return allItems;
-        }
+        //    return allItems;
+        //}
 
         [HttpGet]
-        public IEnumerable<ItemDto> Get(int category)
+        public IEnumerable<ProductDto> Get(int category)
         {
-            var allItems = _categoryService.GetProductsByCategoryId(category);
+            var allItems = _webShopService.GetProductsByCategoryId(category);
 
             return allItems;
         }

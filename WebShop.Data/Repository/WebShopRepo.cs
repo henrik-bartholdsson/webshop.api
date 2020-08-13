@@ -9,7 +9,7 @@ namespace WebShop.API.Repository
     public interface IWebShopRepo
     {
         List<CategoryDto> GetAllCategories();
-        List<ItemDto> GetAllItems();
+        List<ProductDto> GetAllProducts();
         List<CORS> GetAllCors();
         List<PRODUCT> GetItemsByCategoryId(int catId);
     }
@@ -44,14 +44,14 @@ namespace WebShop.API.Repository
             return categoriesDto;
         }
 
-        public List<ItemDto> GetAllItems()
+        public List<ProductDto> GetAllProducts()
         {
             var allItems = _context.PRODUCT.ToList();
-            var itemDto = new List<ItemDto>();
+            var itemDto = new List<ProductDto>();
 
             foreach (var item in allItems)
             {
-                itemDto.Add(new ItemDto
+                itemDto.Add(new ProductDto
                 {
                     Description = item.DESCRIPTION,
                     ExtraPrice = item.EXTRA_PRICE,
@@ -74,8 +74,5 @@ namespace WebShop.API.Repository
         {
             return _context.CORS.ToList();
         }
-
-
-
     }
 }

@@ -10,8 +10,8 @@ namespace WebShop.API.Services
     public interface IWebShopService
     {
         List<CategoryDto> GetAllActiveCategories();
-        List<ItemDto> GetAllItems();
-        List<ItemDto> GetProductsByCategoryId(int catId);
+        List<ProductDto> GetAllProducts();
+        List<ProductDto> GetProductsByCategoryId(int catId);
         string[] GetListOfAllActiveCors();
     }
     public class WebShopService : IWebShopService
@@ -39,18 +39,16 @@ namespace WebShop.API.Services
             return MergeCategories(returnCategories);
         }
 
-        public List<ItemDto> GetAllItems()
+        public List<ProductDto> GetAllProducts()
         {
-            return _categoryRepo.GetAllItems();
+            return _categoryRepo.GetAllProducts();
         }
 
-        public List<ItemDto> GetProductsByCategoryId(int catId)
+        public List<ProductDto> GetProductsByCategoryId(int catId)
         {
-            var a = _categoryRepo.GetItemsByCategoryId(catId);
+            var categoryProducts = _categoryRepo.GetItemsByCategoryId(catId);
 
-            var b = ConvertProductToProductDto(a);
-
-            return b;
+            return ConvertToProductDto(categoryProducts);
         }
 
         public string[] GetListOfAllActiveCors()
@@ -78,19 +76,20 @@ namespace WebShop.API.Services
             return result;
         }
 
-        private static List<ItemDto> ConvertProductToProductDto(List<PRODUCT> products)
+        private static List<ProductDto> ConvertToProductDto(List<PRODUCT> products)
         {
-            var _products = new List<ItemDto>();
+            var _products = new List<ProductDto>();
 
-            foreach(var proddut in products)
+            foreach(var p in products)
             {
-                _products.Add(new ItemDto() {
-                    Description = proddut.DESCRIPTION,
-                    ExtraPrice = proddut.EXTRA_PRICE,
-                    ExtraPriceActive = proddut.EXTRA_PRICE_ACTIVE,
-                    Id = proddut.PRODUCT_ID,
-                    Name = proddut.NAME,
-                    Price = proddut.PRICE,
+                _products.Add(new ProductDto() {
+                    Description = p.DESCRIPTION,
+                    ExtraPrice = p.EXTRA_PRICE,
+                    ExtraPriceActive = p.EXTRA_PRICE_ACTIVE,
+                    Id = p.PRODUCT_ID,
+                    Name = p.NAME,
+                    Price = p.PRICE,
+                    Category_id = p.PARENT_CATEGORY_ID,
                 });
             }
 
