@@ -15,15 +15,6 @@ namespace WebShop.API.Controllers
             _webShopService = categoryService;
         }
 
-
-        //[HttpGet]
-        //public IEnumerable<ItemDto> Get()
-        //{
-        //    var allItems = _categoryService.GetAllItems();
-
-        //    return allItems;
-        //}
-
         [HttpGet]
         public IEnumerable<ProductDto> Get(int category)
         {

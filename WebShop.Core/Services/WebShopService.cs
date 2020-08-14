@@ -10,7 +10,6 @@ namespace WebShop.API.Services
     public interface IWebShopService
     {
         List<CategoryDto> GetAllActiveCategories();
-        List<ProductDto> GetAllProducts();
         List<ProductDto> GetProductsByCategoryId(int catId);
         string[] GetListOfAllActiveCors();
     }
@@ -39,16 +38,9 @@ namespace WebShop.API.Services
             return MergeCategories(returnCategories);
         }
 
-        public List<ProductDto> GetAllProducts()
+        public List<ProductDto> GetProductsByCategoryId(int id)
         {
-            return _categoryRepo.GetAllProducts();
-        }
-
-        public List<ProductDto> GetProductsByCategoryId(int catId)
-        {
-            var categoryProducts = _categoryRepo.GetItemsByCategoryId(catId);
-
-            return ConvertToProductDto(categoryProducts);
+            return _categoryRepo.GetProductsByCategoryId(id);
         }
 
         public string[] GetListOfAllActiveCors()
@@ -76,25 +68,6 @@ namespace WebShop.API.Services
             return result;
         }
 
-        private static List<ProductDto> ConvertToProductDto(List<PRODUCT> products)
-        {
-            var _products = new List<ProductDto>();
-
-            foreach(var p in products)
-            {
-                _products.Add(new ProductDto() {
-                    Description = p.DESCRIPTION,
-                    ExtraPrice = p.EXTRA_PRICE,
-                    ExtraPriceActive = p.EXTRA_PRICE_ACTIVE,
-                    Id = p.PRODUCT_ID,
-                    Name = p.NAME,
-                    Price = p.PRICE,
-                    Category_id = p.PARENT_CATEGORY_ID,
-                });
-            }
-
-            return _products;
-        }
 
         #endregion
     }

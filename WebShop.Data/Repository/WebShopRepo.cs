@@ -11,7 +11,7 @@ namespace WebShop.API.Repository
         List<CategoryDto> GetAllCategories();
         List<ProductDto> GetAllProducts();
         List<CORS> GetAllCors();
-        List<PRODUCT> GetItemsByCategoryId(int catId);
+        List<ProductDto> GetProductsByCategoryId(int catId);
     }
     public class WebShopRepo : IWebShopRepo
     {
@@ -47,32 +47,55 @@ namespace WebShop.API.Repository
         public List<ProductDto> GetAllProducts()
         {
             var allItems = _context.PRODUCT.ToList();
-            var itemDto = new List<ProductDto>();
 
-            foreach (var item in allItems)
-            {
-                itemDto.Add(new ProductDto
-                {
-                    Description = item.DESCRIPTION,
-                    ExtraPrice = item.EXTRA_PRICE,
-                    ExtraPriceActive = item.EXTRA_PRICE_ACTIVE,
-                    Id = item.PRODUCT_ID,
-                    Name = item.NAME,
-                    Price = item.PRICE
-                });
-            }
-
-            return itemDto;
+            return ConvertToProductDto(allItems);
         }
 
-        public List<PRODUCT> GetItemsByCategoryId(int catId)
+        public List<ProductDto> GetProductsByCategoryId(int catId)
         {
-            return _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == catId).ToList();
+            var products = _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == catId).ToList();
+
+            return ConvertToProductDto(products);
         }
 
         public List<CORS> GetAllCors()
         {
             return _context.CORS.ToList();
         }
+
+
+
+
+
+        #region Private methods
+        private static List<ProductDto> ConvertToProductDto(List<PRODUCT> products)
+        {
+            var _products = new List<ProductDto>();
+
+            foreach (var p in products)
+            {
+                _products.Add(new ProductDto()
+                {
+                    Description = p.DESCRIPTION,
+                    ExtraPrice = p.EXTRA_PRICE,
+                    ExtraPriceActive = p.EXTRA_PRICE_ACTIVE,
+                    Id = p.PRODUCT_ID,
+                    Name = p.NAME,
+                    Price = p.PRICE,
+                    Category_id = p.PARENT_CATEGORY_ID,
+                });
+            }
+
+            return _products;
+        }
+
+
+
+
+
+
+
+
+        #endregion
     }
 }
