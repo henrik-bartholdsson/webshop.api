@@ -53,6 +53,7 @@ namespace WebShop.API.Services
 
 
 
+
         #region Private methods
 
         private static List<CategoryDto> MergeCategories(List<CategoryDto> categories, int? id = null)
