@@ -24,22 +24,17 @@ namespace WebShop.API.Services
 
         public List<CategoryDto> GetAllActiveCategories()
         {
-            var returnCategories = new List<CategoryDto>();
-            var allCategories = _categoryRepo.GetAllCategories();
+            var returnCategories = _categoryRepo.GetAllCategories().Where(c => c.Active == true).ToList();
 
-            foreach(var category in allCategories)
-            {
-                if (category.Active == false)
-                    continue;
-
-                returnCategories.Add(category);
-            }
 
             return MergeCategories(returnCategories);
         }
 
         public List<ProductDto> GetProductsByCategoryId(int id)
         {
+            if (id == 0)
+                return _categoryRepo.GetAllProducts();
+
             return _categoryRepo.GetProductsByCategoryId(id);
         }
 
@@ -54,6 +49,10 @@ namespace WebShop.API.Services
         }
 
 
+
+
+
+
         #region Private methods
 
         private static List<CategoryDto> MergeCategories(List<CategoryDto> categories, int? id = null)
@@ -62,7 +61,7 @@ namespace WebShop.API.Services
 
             foreach (var category in result)
             {
-                category.SubCategories = MergeCategories(categories, category.ProductId);
+                category.SubCategories = MergeCategories(categories, category.Id);
             }
 
             return result;

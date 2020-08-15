@@ -34,7 +34,7 @@ namespace WebShop.API.Repository
                     Active = categorie.ACTIVE,
                     Description = categorie.DESCRIPTION,
                     ParentId = categorie.PARENT_ID,
-                    ProductId = categorie.CATEGORY_ID,
+                    Id = categorie.ID,
                     RedirectToId = categorie.REDIRECT_TO_ID,
                     SortOrder = categorie.SORT_ORDER,
                     Title = categorie.TITLE,

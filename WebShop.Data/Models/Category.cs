@@ -9,7 +9,7 @@ namespace WebShop.API.Models
     public class CATEGORY
     {
         [Key]
-        public int CATEGORY_ID { get; set; }
+        public int ID { get; set; }
         public string TITLE { get; set; }
         public string DESCRIPTION { get; set; }
         public int SORT_ORDER { get; set; }
