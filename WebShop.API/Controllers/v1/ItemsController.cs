@@ -18,9 +18,9 @@ namespace WebShop.API.Controllers
         [HttpGet]
         public IEnumerable<ProductDto> Get(int category)
         {
-            var allItems = _webShopService.GetProductsByCategoryId(category);
+            var products = _webShopService.GetProductsByCategoryId(category);
 
-            return allItems;
+            return products;
         }
 
     }
