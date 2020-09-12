@@ -4,10 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebShop.API.App_Start;
 using WebShop.API.Models;
-using WebShop.API.Repository;
-using WebShop.API.Services;
+using WebShop.Data.Repository;
+using WebShop.Data.Repository.Contract;
 
 namespace WebShop.API
 {
@@ -18,7 +17,6 @@ namespace WebShop.API
             Configuration = configuration;
         }
 
-        public IWebShopService _webShopService;
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -26,15 +24,15 @@ namespace WebShop.API
         {
             var connectionstring = Configuration.GetConnectionString("WebShopDev");
             services.AddMvc();
-            services.AddScoped<IWebShopRepo, WebShopRepo>();
-            services.AddScoped<IWebShopService, WebShopService>();
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
-            DbUpConfig.InitDatabse(connectionstring);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IWebShopService webShopService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWork unitOfWork)
         {
+            IUnitOfWork _unitOfWork = unitOfWork;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -44,7 +42,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var cors = webShopService.GetListOfAllActiveCors();
+            var cors = _unitOfWork.CORS.GetAllActiveCors();
 
             app.UseCors(options => options.WithOrigins(cors));
 

@@ -1,4 +1,4 @@
-
+select * from CATEGORY
 /* CLEAN
 DELETE FROM CATEGORY
 */

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.API.Models;
-using WebShop.API.Services;
+using WebShop.Data.Repository.Contract;
 
 namespace WebShop.API.Controllers
 {
@@ -9,15 +9,16 @@ namespace WebShop.API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly IWebShopService _categoryService;
-        public CategoriesController(IWebShopService categoryService)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoriesController(IUnitOfWork unitOfWork)
         {
-            _categoryService = categoryService;
+            _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<CategoryDto> Get()
+        public IEnumerable<CATEGORIES> Get()
         {
-            var categories = _categoryService.GetAllActiveCategories();
+            var categories = _unitOfWork.Category.GetAllNestedCategories();
+            //var categories = _unitOfWork.Category.GetAll();
 
             return categories;
         }

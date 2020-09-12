@@ -8,6 +8,10 @@
     <PackageReference Include="dbup" Version="4.4.0" />
     <PackageReference Include="dbup-core" Version="4.4.0" />
     <PackageReference Include="dbup-sqlserver" Version="4.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200912141422_Initial.cs" />
+    <Compile Remove="Migrations\20200912141422_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200912150133_Initial.cs" />
+    <Compile Remove="Migrations\20200912150133_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200912150558_Initial.cs" />
+    <Compile Remove="Migrations\20200912150558_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\ijdoaysm.bn4~" />
     <None Remove="Scripts\Structure\0001 Create Tables.sql" />
   </ItemGroup>
@@ -14,8 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
