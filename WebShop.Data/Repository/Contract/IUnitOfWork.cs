@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WebShop.API.Models;
+﻿
 
 namespace WebShop.Data.Repository.Contract
 {
@@ -10,6 +7,5 @@ namespace WebShop.Data.Repository.Contract
         ICategoryRepo Category { get; }
         IProductRepo Product { get; }
         CORSRepo CORS { get; }
-
     }
 }

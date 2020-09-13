@@ -18,7 +18,6 @@ namespace WebShop.API.Controllers
         public IEnumerable<CATEGORIES> Get()
         {
             var categories = _unitOfWork.Category.GetAllNestedCategories();
-            //var categories = _unitOfWork.Category.GetAll();
 
             return categories;
         }

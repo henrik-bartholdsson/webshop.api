@@ -31,8 +31,6 @@ namespace WebShop.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWork unitOfWork)
         {
-            IUnitOfWork _unitOfWork = unitOfWork;
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -42,7 +40,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var cors = _unitOfWork.CORS.GetAllActiveCors();
+            var cors = unitOfWork.CORS.GetAllActiveCors();
 
             app.UseCors(options => options.WithOrigins(cors));
 

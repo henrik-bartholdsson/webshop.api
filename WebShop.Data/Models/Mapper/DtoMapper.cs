@@ -22,7 +22,7 @@ namespace WebShop.Data.Models.Mapper
 
         public IEnumerable<ProductDto> Products(IEnumerable<PRODUCT> _products)
         {
-            List<ProductDto> products = new List<ProductDto>();
+            var products = new List<ProductDto>();
 
             foreach (var p in _products)
             {
