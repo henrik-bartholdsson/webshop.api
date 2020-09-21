@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using WebShop.API.Authenticate;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace WebShop.API.Models
 {
-    public class WebShopContext : IdentityDbContext<ApplicationUser>
+    public class WebShopContext : DbContext // add  : IdentityDbContext<ApplicationUser>
     {
         public WebShopContext(DbContextOptions options) : base(options)
         {
