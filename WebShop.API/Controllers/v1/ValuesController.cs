@@ -11,7 +11,7 @@ namespace WebShop.API.Controllers.v1
         public IActionResult GetValues()
         {
 
-            return Ok("Hello world");
+            return Ok(new { Data = "Hello World!" });
         }
     }
 }

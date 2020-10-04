@@ -78,7 +78,7 @@ namespace WebShop.API
 
             var cors = unitOfWork.CORS.GetAllActiveCors();
 
-            app.UseCors(options => options.WithOrigins(cors));
+            app.UseCors(options => options.WithOrigins(cors).AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthentication();
 

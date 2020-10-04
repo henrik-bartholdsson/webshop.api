@@ -4,9 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WebShop.Data\WebShop.Data_old.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Services\" />
