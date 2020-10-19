@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebShop.API.Controllers.v1
 {
@@ -10,8 +11,11 @@ namespace WebShop.API.Controllers.v1
     {
         public IActionResult GetValues()
         {
+            var store = new string[] { "Hello World!", "Today is a good day", "The fall is finaly here", "Coding is fun", "Am I'm hungry?", "Awsome! :)" };
 
-            return Ok(new { Data = "Hello World!" });
+            var rnd = new Random();
+
+            return Ok(new { Data = store[rnd.Next(0, store.Length)] });
         }
     }
 }
