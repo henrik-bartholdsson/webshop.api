@@ -31,6 +31,9 @@ namespace WebShop.API
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
             services.AddMvc();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<WebShopContext>()

@@ -2,7 +2,7 @@
 
 namespace WebShop.Data.Migrations
 {
-    public partial class Add_Order_and_OrderRecord_Tables : Migration
+    public partial class Add_order_orderrecord : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace WebShop.Data.Migrations
                 {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    OrderInfo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,11 +26,11 @@ namespace WebShop.Data.Migrations
                 {
                     OrderRecordId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     ItemName = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    OrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,7 +40,7 @@ namespace WebShop.Data.Migrations
                         column: x => x.OrderId,
                         principalTable: "ORDERS",
                         principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -6,6 +6,7 @@ namespace WebShop.Data.Repository.Contract
     {
         ICategoryRepo Category { get; }
         IProductRepo Product { get; }
+        IOrderRepo Order { get; }
         CORSRepo CORS { get; }
     }
 }

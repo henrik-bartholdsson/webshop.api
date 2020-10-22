@@ -13,11 +13,13 @@ namespace WebShop.Data.Repository
             _context = new WebShopContext(options); ;
             Category = new CategoryRepo(_context);
             Product = new ProductRepo(_context);
+            Order = new OrderRepo(_context);
             CORS = new CORSRepo(_context);
 
         }
         public ICategoryRepo Category { get; private set; }
         public IProductRepo Product { get; private set; }
+        public IOrderRepo Order { get; private set; }
         public CORSRepo CORS { get; private set; }
     }
 }

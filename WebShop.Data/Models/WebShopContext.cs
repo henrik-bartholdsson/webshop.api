@@ -15,7 +15,7 @@ namespace WebShop.API.Models
         public DbSet<PRODUCT> PRODUCT { get; set; }
         public DbSet<CATEGORIES> CATEGORY { get; set; }
         public DbSet<ORDER> ORDERS { get; set; }
-        public DbSet<ORDERECORD> ORDERRECORDS { get; set; }
+        public DbSet<ORDERRECORD> ORDERRECORDS { get; set; }
 
     }
 }

@@ -18,6 +18,7 @@ namespace WebShop.Data.Repository
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
+            _context.SaveChanges();
         }
 
         public TEntity Get(int id)

@@ -10,8 +10,8 @@ using WebShop.API.Models;
 namespace WebShop.Data.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20201019181515_Add_Order_and_OrderRecord_Tables")]
-    partial class Add_Order_and_OrderRecord_Tables
+    [Migration("20201021174546_Add_order_orderrecord")]
+    partial class Add_order_orderrecord
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -305,6 +305,9 @@ namespace WebShop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("OrderInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -313,7 +316,7 @@ namespace WebShop.Data.Migrations
                     b.ToTable("ORDERS");
                 });
 
-            modelBuilder.Entity("WebShop.Data.Models.ORDERECORD", b =>
+            modelBuilder.Entity("WebShop.Data.Models.ORDERRECORD", b =>
                 {
                     b.Property<int>("OrderRecordId")
                         .ValueGeneratedOnAdd()
@@ -326,7 +329,7 @@ namespace WebShop.Data.Migrations
                     b.Property<string>("ItemName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
@@ -400,13 +403,11 @@ namespace WebShop.Data.Migrations
                         .HasForeignKey("PARENT_ID");
                 });
 
-            modelBuilder.Entity("WebShop.Data.Models.ORDERECORD", b =>
+            modelBuilder.Entity("WebShop.Data.Models.ORDERRECORD", b =>
                 {
-                    b.HasOne("WebShop.Data.Models.ORDER", null)
+                    b.HasOne("WebShop.Data.Models.ORDER", "Order")
                         .WithMany("OrderRecords")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }
