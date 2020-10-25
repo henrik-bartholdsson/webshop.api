@@ -63,7 +63,6 @@ namespace WebShop.API
             });
 
 
-            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
