@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebShop.Core.Service;
-using WebShop.Data.Models;
 using WebShop.Data.Models.Dto;
 using WebShop.Data.Repository.Contract;
 
@@ -28,27 +20,29 @@ namespace WebShop.API.Controllers.v1
         public IActionResult GetOrder(int id)
         {
             if (id == 0)
-                return BadRequest("");
+                return BadRequest();
 
             var orders = _unitOfWork.Order.GetOrderByOrderId(id);
 
             if (orders == null)
                 return NotFound();
-            // Use UnitOfWork
 
             return Ok(orders);
         }
 
         [HttpPost]
-        public void CreateOrder([FromBody]OrderInputDto input)
+        public IActionResult CreateOrder([FromBody]OrderInputDto input)
         {
             var service = new OrderService();
             var order = service.InputOrderToDomainModel(input);
 
-
             _unitOfWork.Order.Add(order);
 
+
+            return Ok(order);
         }
+
+        // throw new ValidationException("Invalid input, missing data.");
 
         // return Request.CreateResponse(HttpStatusCode.InternalServerError);
 

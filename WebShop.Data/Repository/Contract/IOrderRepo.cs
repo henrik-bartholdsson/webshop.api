@@ -9,6 +9,6 @@ namespace WebShop.Data.Repository.Contract
     {
         public string GetAllOrdersByUser(string userId);
 
-        public IEnumerable<ORDER> GetOrderByOrderId(int orderId);
+        public ORDER GetOrderByOrderId(int orderId);
     }
 }

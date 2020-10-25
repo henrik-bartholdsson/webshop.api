@@ -20,9 +20,9 @@ namespace WebShop.Data.Repository
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<ORDER> GetOrderByOrderId(int orderId)
+        public ORDER GetOrderByOrderId(int orderId)
         {
-            return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").ToList();
+            return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").FirstOrDefault();
         }
     }
 }

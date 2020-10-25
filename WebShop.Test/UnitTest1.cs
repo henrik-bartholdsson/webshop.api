@@ -14,5 +14,14 @@ namespace WebShop.Test
         {
             Assert.Pass();
         }
+
+        [Test]
+        public void Test2()
+        {
+            if (false == true)
+                Assert.Fail();
+            else
+                Assert.Pass();
+        }
     }
 }
