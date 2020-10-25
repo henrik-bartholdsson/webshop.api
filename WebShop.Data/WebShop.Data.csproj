@@ -1,21 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Models\ijdoaysm.bn4~" />
-    <None Remove="Scripts\Structure\0001 Create Tables.sql" />
+    <Compile Remove="Migrations\20201019181515_Add_Order_and_OrderRecord_Tables.cs" />
+    <Compile Remove="Migrations\20201019181515_Add_Order_and_OrderRecord_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20201021170858_FK_update_to_Order_table.cs" />
+    <Compile Remove="Migrations\20201021170858_FK_update_to_Order_table.Designer.cs" />
+    <Compile Remove="Migrations\20201021172553_Update_to_Order_and_OrderRecord.cs" />
+    <Compile Remove="Migrations\20201021172553_Update_to_Order_and_OrderRecord.Designer.cs" />
+    <Compile Remove="Migrations\20201021174329_Update_to_Order_and_OrderRecord.cs" />
+    <Compile Remove="Migrations\20201021174329_Update_to_Order_and_OrderRecord.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Structure\0001 Create Tables.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

@@ -1,22 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using WebShop.API.Authenticate;
+using WebShop.Data.Models;
 
 namespace WebShop.API.Models
 {
-    public class WebShopContext : DbContext
+    public class WebShopContext : IdentityDbContext<ApplicationUser>
     {
         public WebShopContext(DbContextOptions options) : base(options)
         {
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //{
-        //    if (options.IsConfigured == false)
-        //        options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Database=WebShop; Trusted_connection=true");
-
-        //}
 
         public DbSet<CORS> CORS { get; set; }
         public DbSet<PRODUCT> PRODUCT { get; set; }
-        public DbSet<CATEGORY> CATEGORY { get; set; }
+        public DbSet<CATEGORIES> CATEGORY { get; set; }
+        public DbSet<ORDER> ORDERS { get; set; }
+        public DbSet<ORDERRECORD> ORDERRECORDS { get; set; }
+
     }
 }
