@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using WebShop.Contracts.v1.Requests;
 using WebShop.Core.Service;
+using WebShop.Data.Models;
 using WebShop.Data.Models.Dto;
 using WebShop.Data.Repository.Contract;
+using WebShop.Service.v1;
 
 namespace WebShop.API.Controllers.v1
 {
@@ -10,10 +14,12 @@ namespace WebShop.API.Controllers.v1
     public class OrdersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IOrderService _orderService;
 
-        public OrdersController(IUnitOfWork unitOfWork)
+        public OrdersController(IUnitOfWork unitOfWork, IOrderService orderService)
         {
             _unitOfWork = unitOfWork;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -25,40 +31,32 @@ namespace WebShop.API.Controllers.v1
             var orders = _unitOfWork.Order.GetOrderByOrderId(id);
 
             if (orders == null)
-                return NotFound();
+                return NotFound("Not found");
 
             return Ok(orders);
         }
 
         [HttpPost]
-        public IActionResult CreateOrder([FromBody]OrderInputDto input)
+        public IActionResult CreateOrder([FromBody]RequestOrder requestOrder)
         {
-            var service = new OrderService();
-            var order = service.InputOrderToDomainModel(input);
+            ORDER order;
 
-            _unitOfWork.Order.Add(order);
+            try
+            {
+                order = _orderService.BuildOrder(requestOrder);
+                _orderService.CreateOrder(order);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
+            var responce = _orderService.CreateResponse(order);
 
-            return Ok(order);
+            return Ok(responce);
         }
-
-        // throw new ValidationException("Invalid input, missing data.");
 
         // return Request.CreateResponse(HttpStatusCode.InternalServerError);
 
-        //[HttpPost]
-        //public void CreateOrders()
-        //{
-        //    var recAA = new ORDERRECORD { ItemName = "Hårddisk", ItemId = 1, Price= 123.3, ProductId = 123 };
-        //    var recAB = new ORDERRECORD { ItemName = "SSD", ItemId = 2, Price = 244.9, ProductId = 312 };
-        //    var orderA = new ORDER();
-        //    orderA.OrderRecords = new List<ORDERRECORD>();
-        //    orderA.OrderRecords.Add(recAA);
-        //    orderA.OrderRecords.Add(recAB);
-        //    orderA.UserId = "abc";
-        //    orderA.OrderInfo = "En order på lite saker";
-        //    _unitOfWork.Order.Add(orderA);
-
-        //}
     }
 }

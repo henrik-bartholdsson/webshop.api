@@ -7,6 +7,7 @@ namespace WebShop.Data.Repository.Contract
 {
     public interface IOrderRepo : IRepository<ORDER>
     {
+        public ORDER CreateOrder(ORDER order);
         public string GetAllOrdersByUser(string userId);
 
         public ORDER GetOrderByOrderId(int orderId);

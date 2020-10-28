@@ -15,23 +15,23 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public void Add(TEntity entity)
+        virtual public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
             _context.SaveChanges();
         }
 
-        public TEntity Get(int id)
+        virtual public TEntity Get(int id)
         {
             return _context.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        virtual public IEnumerable<TEntity> GetAll()
         {
             return _context.Set<TEntity>().ToList();
         }
 
-        public void Remove(TEntity entity)
+        virtual public void Remove(TEntity entity)
         {
             throw new NotImplementedException();
         }

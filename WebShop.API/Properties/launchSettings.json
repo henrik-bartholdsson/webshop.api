@@ -17,8 +17,9 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebShop.API": {
-      "commandName": "Project",
+    "WebShop": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\henrik\\Source\\Repos\\WebShop.API\\WebShop.API\\bin\\Debug\\netcoreapp3.1\\WebShop.exe",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {

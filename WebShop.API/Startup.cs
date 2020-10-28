@@ -10,8 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebShop.API.Authenticate;
 using WebShop.API.Models;
+using WebShop.Core.Service;
 using WebShop.Data.Repository;
 using WebShop.Data.Repository.Contract;
+using WebShop.Service.v1;
 
 namespace WebShop.API
 {
@@ -64,6 +66,7 @@ namespace WebShop.API
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

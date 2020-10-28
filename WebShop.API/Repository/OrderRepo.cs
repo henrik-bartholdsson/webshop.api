@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using WebShop.API.Models;
 using WebShop.Data.Models;
@@ -15,6 +15,16 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
+
+        public ORDER CreateOrder(ORDER order)
+        {
+            var result = _context.Add(order);
+
+            _context.SaveChanges();
+
+            return result.Entity;
+        }
+
         public string GetAllOrdersByUser(string userId)
         {
             throw new System.NotImplementedException();
@@ -23,6 +33,11 @@ namespace WebShop.Data.Repository
         public ORDER GetOrderByOrderId(int orderId)
         {
             return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").FirstOrDefault();
+        }
+
+        public override ORDER Get(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
