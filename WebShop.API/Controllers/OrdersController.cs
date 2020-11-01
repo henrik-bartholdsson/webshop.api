@@ -28,7 +28,7 @@ namespace WebShop.API.Controllers.v1
             if (id == 0)
                 return BadRequest();
 
-            var orders = _unitOfWork.Order.GetOrderByOrderId(id);
+            var orders = _unitOfWork.Order.GetOrderByIdAsync(id);
 
             if (orders == null)
                 return NotFound("Not found");
