@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WebShop.Data.Repository.Contract
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity Get(int id);
+        Task<TEntity> GetAsync(int id);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        void Add(TEntity entity);
+        void AddAsync(TEntity entity);
 
-        void Remove(TEntity entity);
+        void RemoveAsync(TEntity entity);
 
     }
 }

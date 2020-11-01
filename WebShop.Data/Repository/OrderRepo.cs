@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using WebShop.API.Models;
 using WebShop.Data.Models;
 using WebShop.Data.Repository.Contract;
@@ -15,14 +16,29 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public string GetAllOrdersByUser(string userId)
+
+        public async Task<ORDER> CreateOrderAsync(ORDER order)
         {
-            throw new System.NotImplementedException();
+            var result = await  _context.AddAsync(order);
+
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
 
-        public ORDER GetOrderByOrderId(int orderId)
+        public string GetOrdersByUserIdAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ORDER GetOrderByIdAsync(int orderId)
         {
             return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").FirstOrDefault();
+        }
+
+        public async override Task<ORDER> GetAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

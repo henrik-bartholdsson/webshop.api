@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using WebShop.API.Models;
 
 namespace WebShop.Data.Repository
@@ -11,9 +13,9 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public string[] GetAllActiveCors()
+        public async Task<string[]> GetAllActiveCorsAsync()
         {
-            var activeCors = _context.CORS.Where(cors => cors.ACTIVE).ToList();
+            var activeCors = await _context.CORS.Where(cors => cors.ACTIVE).ToListAsync();
             return activeCors.Select(c => c.ADDRESS).ToArray();
         }
     }

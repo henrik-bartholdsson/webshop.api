@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebShop.API.Models;
 
 namespace WebShop.Data.Repository.Contract
 {
     public interface ICategoryRepo : IRepository<CATEGORIES>
     {
-        IEnumerable<CATEGORIES> GetAllNestedCategories();
+        Task<IEnumerable<CATEGORIES>> GetAllNestedCategoriesAsync();
     }
 }
