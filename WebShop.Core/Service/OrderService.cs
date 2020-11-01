@@ -41,7 +41,7 @@ namespace WebShop.Core.Service
             foreach (var rec in input.Items)
             {
                 itemId++;
-                var item = _unitOfWork.Product.GetAsync(rec);
+                var item = _unitOfWork.Product.GetAsync(rec).Result;
 
                 if(item == null)
                     throw new Exception("Invalid input, bad item(s).");
@@ -90,7 +90,7 @@ namespace WebShop.Core.Service
 
         public ORDER CreateOrder(ORDER order)
         {
-            var response = _unitOfWork.Order.CreateOrderAsync(order);
+            var response = _unitOfWork.Order.CreateOrderAsync(order).Result;
 
             return response;
         }

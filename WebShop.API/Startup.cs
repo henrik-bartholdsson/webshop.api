@@ -81,7 +81,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var cors = unitOfWork.CORS.GetAllActiveCorsAsync();
+            var cors = unitOfWork.CORS.GetAllActiveCorsAsync().Result;
 
             app.UseCors(options => options.WithOrigins(cors).AllowAnyHeader().AllowAnyMethod());
 

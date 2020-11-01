@@ -17,7 +17,7 @@ namespace WebShop.API.Controllers
 
         public IEnumerable<CATEGORIES> Get()
         {
-            var categories = _unitOfWork.Category.GetAllNestedCategoriesAsync();
+            var categories = _unitOfWork.Category.GetAllNestedCategoriesAsync().Result;
 
             return categories;
         }
