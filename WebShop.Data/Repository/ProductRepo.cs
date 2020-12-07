@@ -15,7 +15,7 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<PRODUCT>> GetAllAsync(int productId)
+        public async Task<IEnumerable<PRODUCT>> GetAllinCategoryAsync(int productId)
         {
             return await _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == productId).ToListAsync();
         }

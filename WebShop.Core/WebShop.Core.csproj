@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\v2\" />
-    <Folder Include="Service\v2\" />
+    <Compile Remove="Service\v2\**" />
+    <EmbeddedResource Remove="Service\v2\**" />
+    <None Remove="Service\v2\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -31,7 +31,7 @@ namespace WebShop.API
         {
             var connectionstring = Configuration.GetConnectionString("WebShopDev");
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
-            services.AddMvc();
+            //services.AddMvc();
 
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -66,8 +66,13 @@ namespace WebShop.API
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IServiceV1, ServiceV1>();
         }
+
+
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWork unitOfWork)
@@ -77,7 +82,7 @@ namespace WebShop.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection(); // Denna strular med CORS, kolla vad denna är till för.
 
             app.UseRouting();
 

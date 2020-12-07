@@ -6,6 +6,6 @@ namespace WebShop.Data.Repository.Contract
 {
     public interface IProductRepo : IRepository<PRODUCT>
     {
-        Task<IEnumerable<PRODUCT>> GetAllAsync(int productId);
+        Task<IEnumerable<PRODUCT>> GetAllinCategoryAsync(int productId);
     }
 }

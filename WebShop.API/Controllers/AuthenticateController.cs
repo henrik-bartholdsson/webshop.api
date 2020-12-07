@@ -62,7 +62,8 @@ namespace JWTAuthentication.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    Name = user.UserName
                 });
             }
             return Unauthorized();

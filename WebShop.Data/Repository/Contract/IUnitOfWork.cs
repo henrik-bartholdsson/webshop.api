@@ -1,6 +1,4 @@
-﻿
-
-namespace WebShop.Data.Repository.Contract
+﻿namespace WebShop.Data.Repository.Contract
 {
     public interface IUnitOfWork
     {

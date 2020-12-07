@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using WebShop.API.Models;
 using WebShop.Data.Models.Dto;
-using WebShop.Data.Models.Mapper;
-using WebShop.Data.Repository.Contract;
+using WebShop.Service.v1;
 
 namespace WebShop.API.Controllers
 {
@@ -12,20 +10,18 @@ namespace WebShop.API.Controllers
     public class ItemsController : ControllerBase
     {
         
-        private readonly IUnitOfWork _unitOfWork;
-        public ItemsController(IUnitOfWork unitOfWork)
+        private readonly IServiceV1 _service;
+        public ItemsController(IServiceV1 service)
         {
-            _unitOfWork = unitOfWork;
+            _service = service;
         }
 
         [HttpGet]
         public IEnumerable<ProductDto> Get(int category)
         {
-            var mapper = new DtoMapper();
-            var products = _unitOfWork.Product.GetAllAsync(category).Result;
-            var productsDto = mapper.Products(products);
+            var response = _service.GetProductsInCategory(category);
 
-            return productsDto;
+            return response;
         }
 
     }

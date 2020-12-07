@@ -1,59 +1,64 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
+using WebShop.API.Authenticate;
 using WebShop.Contracts.v1.Requests;
-using WebShop.Core.Service;
-using WebShop.Data.Models;
 using WebShop.Data.Models.Dto;
-using WebShop.Data.Repository.Contract;
 using WebShop.Service.v1;
 
 namespace WebShop.API.Controllers.v1
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IOrderService _orderService;
+        private readonly IServiceV1 _service;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrdersController(IUnitOfWork unitOfWork, IOrderService orderService)
+        public OrdersController(IServiceV1 orderService, UserManager<ApplicationUser> userManager)
         {
-            _unitOfWork = unitOfWork;
-            _orderService = orderService;
+            _service = orderService;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult GetOrder(int id)
         {
             if (id == 0)
-                return BadRequest();
-
-            var orders = _unitOfWork.Order.GetOrderByIdAsync(id);
-
-            if (orders == null)
-                return NotFound("Not found");
-
-            return Ok(orders);
-        }
-
-        [HttpPost]
-        public IActionResult CreateOrder([FromBody]RequestOrder requestOrder)
-        {
-            ORDER order;
+                return BadRequest("Id can not be 0 (zero)");
 
             try
             {
-                order = _orderService.BuildOrder(requestOrder);
-                _orderService.CreateOrder(order);
+                var a = _service.GetOrder(id);
+                return Ok(a);
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
 
-            var responce = _orderService.CreateResponse(order);
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] RequestOrderDto requestOrder)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            requestOrder.UserId = user.Id;
+            OrderDto order;
+            
 
-            return Ok(responce);
+            try
+            {
+                order = _service.CreateOrder(requestOrder);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(order);
         }
 
         // return Request.CreateResponse(HttpStatusCode.InternalServerError);

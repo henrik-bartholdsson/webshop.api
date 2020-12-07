@@ -20,8 +20,9 @@ namespace WebShop.Data.Repository
         public async Task<ORDER> CreateOrderAsync(ORDER order)
         {
             var result = await  _context.AddAsync(order);
-
             await _context.SaveChangesAsync();
+
+            result.Entity.OrderId = order.OrderId;
 
             return result.Entity;
         }
