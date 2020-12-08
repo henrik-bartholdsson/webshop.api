@@ -25,17 +25,31 @@ namespace WebShop.API.Controllers.v1
         }
 
         [HttpGet]
-        public IActionResult GetOrder(int id)
+        public async Task<IActionResult> GetOrder(int? id) // Kolla så att ordern tillhör den inlogade användaren
         {
-            if (id == 0)
-                return BadRequest("Id can not be 0 (zero)");
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            int orderId = 0;
+
+            if (id != null)
+            {
+                orderId = (int)id;
+                try
+                {
+                    var a = _service.GetOrder(orderId, user.Id); // Hämta specifik order
+                    return Ok(a);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
 
             try
             {
-                var a = _service.GetOrder(id);
+                var a = _service.GetAllOrders(user.Id); // Hämta alla ordrar
                 return Ok(a);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

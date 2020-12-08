@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Models;
@@ -27,9 +28,11 @@ namespace WebShop.Data.Repository
             return result.Entity;
         }
 
-        public string GetOrdersByUserIdAsync(string userId)
+        public async Task<IEnumerable<ORDER>> GetOrdersByUserIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            var result = await _context.ORDERS.Where(o => o.UserId == userId).Include("OrderRecords").ToListAsync();
+
+            return result;
         }
 
         public ORDER GetOrderByIdAsync(int orderId)

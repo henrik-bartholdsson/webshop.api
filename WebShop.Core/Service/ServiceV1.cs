@@ -18,7 +18,7 @@ namespace WebShop.Core.Service
         }
 
 
-        public OrderDto CreateOrder(RequestOrderDto requestOrder)
+        public OrderDto CreateOrder(RequestOrderDto requestOrder) // Kolla så att användaren som skapar ordern finns.
         {
             ValidateOrderInput(requestOrder);
 
@@ -31,16 +31,35 @@ namespace WebShop.Core.Service
         }
 
 
-        public OrderDto GetOrder(int id)
+        public OrderDto GetOrder(int id, string userId)
         {
             var order = _unitOfWork.Order.GetOrderByIdAsync(id);
 
             if (order == null)
                 throw new Exception("Bad request. Order not found");
 
+            if (order.UserId != userId)
+                throw new Exception("Unauthorized");
+
             var result = ConvertOrder(order);
 
             return result;
+        }
+
+        public IEnumerable<OrderDto> GetAllOrders(string userId)
+        {
+            var lista = _unitOfWork.Order.GetOrdersByUserIdAsync(userId).Result;
+            var orders = new List<OrderDto>();
+
+            if (lista == null)
+                throw new Exception("No orders found");
+
+            foreach(var o in lista)
+            {
+                orders.Add(ConvertOrder(o));
+            }
+
+            return orders;
         }
 
 
@@ -158,6 +177,7 @@ namespace WebShop.Core.Service
 
             return result;
         }
+
 
 
         #endregion
