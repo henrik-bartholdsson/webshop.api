@@ -148,6 +148,7 @@ namespace WebShop.Core.Service
                     Id = p.ID,
                     Name = p.NAME,
                     Price = p.PRICE,
+                    Avalible = p.AmountInStock,
                 });
             }
 

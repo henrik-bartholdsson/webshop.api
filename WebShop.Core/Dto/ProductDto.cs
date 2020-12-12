@@ -9,5 +9,6 @@
         public int ExtraPrice { get; set; }
         public bool ExtraPriceActive { get; set; }
         public int Category_id { get; set; }
+        public int Avalible { get; set; }
     }
 }
