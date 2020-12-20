@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:54339",
-      "sslPort": 44324
+      "sslPort": 44319
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -17,8 +17,9 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebShop.API": {
-      "commandName": "Project",
+    "WebShop": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\henrik\\Source\\Repos\\WebShop.API\\WebShop.API\\bin\\Debug\\netcoreapp3.1\\WebShop.exe",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {

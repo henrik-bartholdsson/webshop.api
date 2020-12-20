@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebShop.API.Models;
 using WebShop.Data.Repository.Contract;
 
@@ -13,9 +15,9 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public IEnumerable<PRODUCT> GetAllByProduct(int productId)
+        public async Task<IEnumerable<PRODUCT>> GetAllinCategoryAsync(int productId)
         {
-            return _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == productId).ToList();
+            return await _context.PRODUCT.Where(p => p.PARENT_CATEGORY_ID == productId).ToListAsync();
         }
     }
 }

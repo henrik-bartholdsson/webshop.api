@@ -3,7 +3,9 @@ INSERT INTO CORS ([ADDRESS], [ACTIVE], [COMMENT])
 VALUES ('http://localhost:3000',1, 'For the React JS App')
 
 
-
+/*
+http://127.0.0.1:5500
+*/
 
 /* Some cors that should not be allowed by the API
 *****************************************************

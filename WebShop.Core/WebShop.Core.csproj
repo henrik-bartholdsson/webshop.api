@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\v2\**" />
+    <EmbeddedResource Remove="Service\v2\**" />
+    <None Remove="Service\v2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WebShop.Data\WebShop.Data.csproj" />
   </ItemGroup>
 

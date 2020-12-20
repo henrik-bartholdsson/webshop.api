@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using WebShop.API.Models;
 using WebShop.Data.Repository.Contract;
 
@@ -15,23 +16,23 @@ namespace WebShop.Data.Repository
             _context = context;
         }
 
-        public void Add(TEntity entity)
+        virtual public async void AddAsync(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
-            _context.SaveChanges();
+            await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public TEntity Get(int id)
+        virtual public async Task<TEntity> GetAsync(int id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        virtual public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return _context.Set<TEntity>().ToList();
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public void Remove(TEntity entity)
+        virtual public async void RemoveAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }
