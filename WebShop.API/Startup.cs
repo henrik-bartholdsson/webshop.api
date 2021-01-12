@@ -29,7 +29,7 @@ namespace WebShop.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionstring = Configuration.GetConnectionString("WebShopDev");
+            var connectionstring = Configuration["ConnectionStrings:WebShopDB"];
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
             //services.AddMvc();
 
@@ -86,7 +86,7 @@ namespace WebShop.API
 
             app.UseRouting();
 
-            var cors = unitOfWork.CORS.GetAllActiveCorsAsync().Result;
+            //var cors = unitOfWork.CORS.GetAllActiveCorsAsync().Result;
 
             app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().SetIsOriginAllowed(origin => true));
 
