@@ -18,18 +18,17 @@ namespace WebShop.Core.Service
         }
 
 
-        public OrderDto CreateOrder(RequestOrderDto requestOrder) // Kolla så att användaren som skapar ordern finns.
+        public OrderDto CreateOrder(RequestOrderDto requestOrder)
         {
             ValidateOrderInput(requestOrder);
 
             var order = BuildOrder(requestOrder);
             var response = _unitOfWork.Order.CreateOrderAsync(order);
 
-            var a = ConvertOrder(response.Result);
+            var result = ConvertOrder(response.Result);
 
-            return a;
+            return result;
         }
-
 
         public OrderDto GetOrder(int id, string userId)
         {
@@ -62,7 +61,6 @@ namespace WebShop.Core.Service
             return orders;
         }
 
-
         public IEnumerable<ProductDto> GetProductsInCategory(int categoryId)
         {
             var products = _unitOfWork.Product.GetAllinCategoryAsync(categoryId).Result;
@@ -83,7 +81,6 @@ namespace WebShop.Core.Service
         {
             var NewOrderStatus = _unitOfWork.Order.GetOrderStatus("New").Result;
             
-
             var result = new ORDER
             {
                 OrderInfo = order.OrderInfo,
@@ -112,7 +109,6 @@ namespace WebShop.Core.Service
 
             return result;
         }
-
 
         private void ValidateOrderInput(RequestOrderDto order)
         {
