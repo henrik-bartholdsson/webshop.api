@@ -30,7 +30,7 @@ namespace WebShop.Data.Repository
 
         public async Task<IEnumerable<ORDER>> GetOrdersByUserIdAsync(string userId)
         {
-            var result = await _context.ORDERS.Where(o => o.UserId == userId).Include("OrderRecords").ToListAsync();
+            var result = await _context.ORDERS.Where(o => o.UserId == userId).Include("OrderRecords").Include("OrderStatus").ToListAsync();
 
             return result;
         }
@@ -43,6 +43,13 @@ namespace WebShop.Data.Repository
         public async override Task<ORDER> GetAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ORDER_STATUS> GetOrderStatus(string text)
+        {
+            var result = await _context.ORDER_STATUS.Where(x => x.OrderStatusText == text).SingleAsync();
+
+            return result;
         }
     }
 }

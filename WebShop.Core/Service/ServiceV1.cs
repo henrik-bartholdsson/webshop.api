@@ -81,11 +81,15 @@ namespace WebShop.Core.Service
 
         private ORDER BuildOrder(RequestOrderDto order)
         {
+            var NewOrderStatus = _unitOfWork.Order.GetOrderStatus("New").Result;
+            
+
             var result = new ORDER
             {
                 OrderInfo = order.OrderInfo,
                 OrderRecords = new List<ORDERRECORD>(),
-                UserId = order.UserId
+                UserId = order.UserId,
+                OrderStatus = NewOrderStatus,
             };
 
             foreach (var item in order.Items)
@@ -163,6 +167,7 @@ namespace WebShop.Core.Service
                 OrderInfo = order.OrderInfo,
                 OrderId = order.OrderId,
                 Items = new List<Dto.OrderRecordDto>(),
+                Status = order.OrderStatus.OrderStatusText
             };
 
             foreach (var r in order.OrderRecords)

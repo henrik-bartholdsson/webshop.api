@@ -8,5 +8,6 @@ namespace WebShop.Data.Models.Dto
         public List<OrderRecordDto> Items { get; set; }
         public string OrderInfo { get; set; }
         public int OrderId { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace WebShop.Data.Models
         public string UserId { get; set; }
         public string OrderInfo { get; set; }
         public virtual List<ORDERRECORD> OrderRecords { get; set; }
+        public virtual ORDER_STATUS OrderStatus { get; set; }
     }
 }

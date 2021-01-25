@@ -8,7 +8,7 @@ namespace WebShop.Data.Repository.Contract
     {
         public Task<ORDER> CreateOrderAsync(ORDER order);
         public Task<IEnumerable<ORDER>> GetOrdersByUserIdAsync(string userId);
-
         public ORDER GetOrderByIdAsync(int orderId);
+        Task<ORDER_STATUS> GetOrderStatus(string text);
     }
 }
