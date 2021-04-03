@@ -37,7 +37,7 @@ namespace WebShop.Data.Repository
 
         public ORDER GetOrderByIdAsync(int orderId)
         {
-            return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").FirstOrDefault();
+            return _context.ORDERS.Where(x => x.OrderId == orderId).Include("OrderRecords").Include("OrderStatus").FirstOrDefault();
         }
 
         public async override Task<ORDER> GetAsync(int id)

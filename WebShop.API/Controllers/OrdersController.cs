@@ -25,7 +25,7 @@ namespace WebShop.API.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOrder(int? id) // Kolla så att ordern tillhör den inlogade användaren
+        public async Task<IActionResult> GetOrder(int? id)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             int orderId = 0;
@@ -35,7 +35,7 @@ namespace WebShop.API.Controllers.v1
                 orderId = (int)id;
                 try
                 {
-                    var a = _service.GetOrder(orderId, user.Id); // Hämta specifik order
+                    var a = _service.GetOrder(orderId, user.Id);
                     return Ok(a);
                 }
                 catch (Exception ex)
@@ -46,7 +46,7 @@ namespace WebShop.API.Controllers.v1
 
             try
             {
-                var a = _service.GetAllOrders(user.Id); // Hämta alla ordrar
+                var a = _service.GetAllOrders(user.Id);
                 return Ok(a);
             }
             catch (Exception ex)
@@ -74,8 +74,5 @@ namespace WebShop.API.Controllers.v1
 
             return Ok(order);
         }
-
-        // return Request.CreateResponse(HttpStatusCode.InternalServerError);
-
     }
 }

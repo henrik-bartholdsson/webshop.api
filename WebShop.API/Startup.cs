@@ -27,12 +27,10 @@ namespace WebShop.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionstring = Configuration["ConnectionStrings:WebShopDB"];
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
-            //services.AddMvc();
 
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -74,10 +72,6 @@ namespace WebShop.API
 
 
 
-
-
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWork unitOfWork)
         {
             if (env.IsDevelopment())
@@ -85,11 +79,7 @@ namespace WebShop.API
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHttpsRedirection(); // Denna strular med CORS, kolla vad denna är till för.
-
             app.UseRouting();
-
-            //var cors = unitOfWork.CORS.GetAllActiveCorsAsync().Result;
 
             app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().SetIsOriginAllowed(origin => true));
 
