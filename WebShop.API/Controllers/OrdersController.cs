@@ -24,30 +24,33 @@ namespace WebShop.API.Controllers.v1
             _userManager = userManager;
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> GetOrder(int? id)
+        public async Task<IActionResult> GetOrders()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            int orderId = 0;
-
-            if (id != null)
+            try
             {
-                orderId = (int)id;
-                try
-                {
-                    var a = _service.GetOrder(orderId, user.Id);
-                    return Ok(a);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+                var orders = _service.GetAllOrders(user.Id);
+                return Ok(orders);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             try
             {
-                var a = _service.GetAllOrders(user.Id);
-                return Ok(a);
+                var order = _service.GetOrder(id, user.Id);
+                return Ok(order);
             }
             catch (Exception ex)
             {
@@ -61,7 +64,7 @@ namespace WebShop.API.Controllers.v1
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             requestOrder.UserId = user.Id;
             OrderDto order;
-            
+
 
             try
             {
