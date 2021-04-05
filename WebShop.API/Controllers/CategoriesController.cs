@@ -15,6 +15,7 @@ namespace WebShop.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
         public IEnumerable<CATEGORIES> Get()
         {
             var categories = _unitOfWork.Category.GetAllNestedCategoriesAsync().Result;

@@ -10,3 +10,8 @@
 # ConnectionString's
 Write-Output "Added Variable ConnectionStrings:WebShopDB"
 [System.Environment]::SetEnvironmentVariable('ConnectionStrings:WebShopDB','Server=(localdb)\mssqllocaldb;Database=WebShop;Trusted_Connection=True;MultipleActiveResultSets=true',[System.EnvironmentVariableTarget]::Machine)
+
+
+
+
+
