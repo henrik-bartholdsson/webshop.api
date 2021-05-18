@@ -34,7 +34,8 @@ namespace WebShop.Data.Repository
 
         virtual public async void RemoveAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Remove<TEntity>(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

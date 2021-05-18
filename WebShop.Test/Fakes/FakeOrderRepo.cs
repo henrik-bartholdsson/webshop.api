@@ -42,7 +42,7 @@ namespace WebShop.Data.Repository
 
         public async override Task<ORDER> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.ORDERS.Where(x => x.OrderId == id).FirstOrDefaultAsync();
         }
 
         public async Task<ORDER_STATUS> GetOrderStatus(string text)
