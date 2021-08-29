@@ -29,7 +29,7 @@ namespace WebShop.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionstring = Configuration["ConnectionStrings:WebShopDB"];
+            var connectionstring = Configuration.GetConnectionString("WebShopDB");
             services.AddDbContext<WebShopContext>(options => options.UseSqlServer(connectionstring));
 
             services.AddControllers().AddNewtonsoftJson(options =>
